@@ -1,0 +1,12 @@
+README.liblinkedlist
+
+Currently, the entire liblinkedlist implementation is in the header files. Yes,
+this is ugly and horrenous and messy... and the only way to do templates. 
+Due to the constraints of export and the requirements of templates, if you
+want to use templates, you have to implement _everything_ in the headers.
+
+It's horrendous and absurd. However, templates are much easier to use instead 
+of writing a separate linked list for every object that needs them. 
+
+The moral of the story is that C++ sucks, but code reuse takes preference over
+code readability. At least you don't have to maintain it.
