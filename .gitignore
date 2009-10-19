@@ -1,0 +1,14 @@
+# Ignore vim swap files. God those are easy to check in by accident.
+.*.swp
+
+# Ignore any files resulting from compilation
+*.o
+*.a
+*.la
+*.lo
+
+# Ignore test applications
+test_bst
+test_liblinkedlist
+test_fstring
+
