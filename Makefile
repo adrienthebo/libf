@@ -36,6 +36,7 @@ check: test_fstring test_liblinkedlist test_bst
 
 clean:
 	rm -f fstring.o \
+	    test_fstring.o \
 	    fstring.a;
 	rm -f test_fstring \
 	test_liblinkedlist \

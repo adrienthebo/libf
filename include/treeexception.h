@@ -26,6 +26,7 @@ class tree_element_not_found {
 
 	friend std::ostream &operator<<(std::ostream & os, tree_element_not_found e) {
 	    os << "No element with key " << e.element_key() << " exists in the tree.";
+	    return os;
 	}
 };
 

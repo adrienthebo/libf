@@ -38,7 +38,7 @@ class Bst {
 	    }
 	}
 
-	int r_get(unsigned long key, TreeNode<T> *current_node) throw(tree_element_not_found) {
+	T r_get(unsigned long key, TreeNode<T> *current_node) throw(tree_element_not_found) {
 	    if(current_node == NULL) {
 		throw tree_element_not_found(key);
 	    }
@@ -137,7 +137,7 @@ class Bst {
 	    clear();
 	}
 
-	void add(unsigned long key, int data) {
+	void add(unsigned long key, T data) {
 	    TreeNode<T> *new_node = new TreeNode<T>(key, data);
 	   
 	    if(m_root == NULL) { //There is no root node, create one.
@@ -162,8 +162,8 @@ class Bst {
 	    return has;
 	}
 
-	int get(unsigned long key) throw(tree_element_not_found) {
-	    int return_data;
+	T get(unsigned long key) throw(tree_element_not_found) {
+	    T return_data;
 	    try {
 		return_data = r_get(key, m_root);
 	    }

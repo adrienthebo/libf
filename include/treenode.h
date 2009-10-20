@@ -26,7 +26,7 @@ class TreeNode {
 	    m_right = NULL;
 	}
 
-	TreeNode(unsigned long key, int data) {
+	TreeNode(unsigned long key, T data) {
 	    m_key = key;
 	    m_data = data;
 
