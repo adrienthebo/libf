@@ -150,7 +150,6 @@ class Bst {
 	    m_size++;
 	}
 
-	/* TODO fix horrible horrible HORRIBLE method of testing if an element exists. */
 	int has(unsigned long key) {
 	    bool has = false;
 	    try {

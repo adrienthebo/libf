@@ -1,40 +1,44 @@
-
+/* Defines a string class based off of a char array.
+ */
 #include "../include/fstring.h"
 #include <cstring>
 
+//Default constructor
 FString::FString() {
     m_string = new char[1];
     strcpy(m_string, "\0");
 }
 
+//cstring constructor
 FString::FString(const char *c_string) {
     m_string = new char[strlen(c_string)];
     strcpy(m_string, c_string);
 }
 
+//Copy constructor
 FString::FString(const FString & f) {
     m_string = new char[strlen(f.m_string)];
     strcpy(m_string, f.m_string);
 }
 
+//Bounded cstring constructor (only copy (int)length elements)
 FString::FString(const char *c_string, unsigned int length) {
     m_string = new char[length + 1];
     strncpy(m_string, c_string, length);
-    *(m_string + length + 1) = '\0';
-    //TODO remove
-    //std::cout << "\nHOLY SHIT STRING: \"" << *this << "\"" << std::endl;
+    *(m_string + length) = '\0';
 }
 
+//Array destructor
 FString::~FString() {
-    //TODO remove
-    //std::cout << "Stomping on " << m_string << " with address of " << this << std::endl;
     delete [] m_string;
 }
 
+//Null safe size
 int FString::size() {
     return (m_string == NULL) ? 0 : strlen(m_string);
 }
 
+//Returns a cstring copy of the fstring
 char *FString::cstring() {
     char *c_string = new char[ strlen(m_string)];
 
@@ -43,30 +47,31 @@ char *FString::cstring() {
     return c_string;
 }
 
+//Yaaaay operator overloading
 bool FString::operator==(FString & f) {
     return strcmp(m_string, f.m_string) == 0;
 }
 
+//Yaaay more operator overloading
 bool FString::operator!=(FString & f) {
     return !(strcmp(m_string, f.m_string) == 0);
 }
 
+//Yaaaaay operator overloading make it stop :(
 std::ostream & operator<<(std::ostream & os, const FString s) {
     for(char *c = s.m_string; *c != '\0'; c++) 
 	os << *c;
     return os;
 }
 
-/* This is going to leak like a sieve */
+//This function may or may not leak like a sieve
 Linkedlist<FString *> FString::tokenize() {
     
     Linkedlist<FString *> tokens;
 
-    char *line = new char[ strlen(m_string) + 1];
+    char *line = new char[ strlen(m_string)];
     char *line_iter = line;
     strcpy(line, m_string);
-
-    //std::cout << "Line: " << FString(line) << std::endl;
 
     int length = strlen(line);
     bool last_whitespace = true;
@@ -74,16 +79,13 @@ Linkedlist<FString *> FString::tokenize() {
     char *substr_offset = NULL;
     int substr_length = 0;
 
-
+    //Iterate over string and copy out words
     for(int i = 0; i < length; i++, line_iter++) {
-	//std::cout << *line_iter;
 
-	if(isspace(*line_iter)) {
+	if(isspace(*line_iter)) { //Current position is boring
 	    
 	    if(!last_whitespace) { //Reached end of token
 		FString *current_token = new FString(substr_offset, substr_length);
-		//TODO remove
-		//std::cout << *current_token << std::endl;
 		tokens.add(current_token);
 
 		substr_offset = NULL;
@@ -107,8 +109,6 @@ Linkedlist<FString *> FString::tokenize() {
     if(substr_offset != NULL) { //Store remaining tokens
 	FString *current_token = new FString(substr_offset, substr_length);
 	tokens.add(current_token);
-	//TODO removeme
-	//std::cout << *current_token << std::endl;
     }
 
     delete [] line;
@@ -116,6 +116,7 @@ Linkedlist<FString *> FString::tokenize() {
     return tokens;
 }
 
+//Return token at set position
 FString *FString::token(int i) {
     
     Linkedlist<FString *> tokens = tokenize();
@@ -128,6 +129,7 @@ FString *FString::token(int i) {
     }
 }
 
+//Return number of tokens that can be returned
 int FString::count_tokens() {
     return tokenize().size();
 }

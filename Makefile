@@ -5,6 +5,7 @@ AR = ar
 
 CXXFLAGS = -Iinclude -Wall -g
 ARFLAGS = rv
+BOOST_LDFLAGS = -lboost_unit_test_framework
 
 VPATH = lib include tests
 
@@ -16,11 +17,11 @@ fstring.o: fstring.cpp fstring.h
 treeexception.o: treeexception.cpp treeexception.h
 
 test_bst: test_bst.cpp
-	$(CC) $(LDFLAGS) -lboost_unit_test_framework -o $@ $^
+	$(CC) $(LDFLAGS) $(BOOST_LDFLAGS) -o $@ $^
 test_fstring: fstring.o test_fstring.o
-	$(CC) $(LDFLAGS) -o $@ $^ 
+	$(CC) $(LDFLAGS) $(BOOST_LDFLAGS) -o $@ $^ 
 test_liblinkedlist: test_linkedlist.cpp
-	$(CC) $(LDFLAGS) -lboost_unit_test_framework -o $@ $^
+	$(CC) $(LDFLAGS) $(BOOST_LDFLAGS) -o $@ $^
 
 fstring.a: fstring.o
 	$(AR) $(ARFLAGS) $@ $^
