@@ -49,12 +49,12 @@ char *FString::cstring() const {
 }
 
 //Yaaaay operator overloading
-bool FString::operator==(FString & f) {
+bool FString::operator==(const FString & f) const {
     return strcmp(m_string, f.m_string) == 0;
 }
 
 //Yaaay more operator overloading
-bool FString::operator!=(FString & f) {
+bool FString::operator!=(const FString & f) const {
     return !(strcmp(m_string, f.m_string) == 0);
 }
 

@@ -29,8 +29,8 @@ class FString {
 	FString & concat(const FString & f);
 
 	//Overloaded operators
-	bool operator==(FString & f);
-	bool operator!=(FString & f);
+	bool operator==(const FString & f) const;
+	bool operator!=(const FString & f) const;
 	friend std::ostream & operator<<(std::ostream & os, const FString s);
 };
 
