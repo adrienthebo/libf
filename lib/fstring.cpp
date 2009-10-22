@@ -1,4 +1,5 @@
-/* Defines a string class based off of a char array.
+/* 
+ * Defines a string class based off of a char array.
  */
 #include "../include/fstring.h"
 #include <cstring>
@@ -22,7 +23,7 @@ FString::FString(const FString & f) {
 }
 
 //Bounded cstring constructor (only copy (int)length elements)
-FString::FString(const char *c_string, unsigned int length) {
+FString::FString(const char *c_string, const unsigned int length) {
     m_string = new char[length + 1];
     strncpy(m_string, c_string, length);
     *(m_string + length) = '\0';
@@ -31,15 +32,15 @@ FString::FString(const char *c_string, unsigned int length) {
 //Array destructor
 FString::~FString() {
     delete [] m_string;
-}
+}  
 
 //Null safe size
-int FString::size() {
-    return (m_string == NULL) ? 0 : strlen(m_string);
+int FString::size() const {
+    return strlen(m_string);
 }
 
 //Returns a cstring copy of the fstring
-char *FString::cstring() {
+char *FString::cstring() const {
     char *c_string = new char[ strlen(m_string)];
 
     strcpy(c_string, m_string);
@@ -65,7 +66,7 @@ std::ostream & operator<<(std::ostream & os, const FString s) {
 }
 
 //This function may or may not leak like a sieve
-Linkedlist<FString *> FString::tokenize() {
+Linkedlist<FString *> FString::tokenize() const {
     
     Linkedlist<FString *> tokens;
 
@@ -117,7 +118,7 @@ Linkedlist<FString *> FString::tokenize() {
 }
 
 //Return token at set position
-FString *FString::token(int i) {
+FString *FString::token(int i) const {
     
     Linkedlist<FString *> tokens = tokenize();
 
@@ -130,6 +131,21 @@ FString *FString::token(int i) {
 }
 
 //Return number of tokens that can be returned
-int FString::count_tokens() {
+int FString::count_tokens() const {
     return tokenize().size();
 }
+
+FString & FString::concat(const FString & f) {
+    
+    char *new_m_string = new char[ strlen(m_string) + strlen(f.m_string) ];
+
+    strcpy(new_m_string, m_string);
+    strcat(new_m_string, f.m_string);
+
+    delete [] m_string; //Deallocate current string
+
+    m_string = new_m_string;
+
+    return *this;
+}
+

@@ -8,22 +8,29 @@ class FString {
     private:
 	char *m_string;
     public:
+	//Constructors
 	FString();
 	FString(const FString & f);
 	FString(const char *c_string);
-	FString(const char *c_string, unsigned int length);
+	FString(const char *c_string, const unsigned int length);
 
 	~FString();
 	
-	char *cstring();
-	int size();
-	Linkedlist<FString *> tokenize();
-	FString *token(int i);
-	int count_tokens();
+	//pseudo accessors
+	char *cstring() const;
+	int size() const;
 
+	//tokenizers
+	Linkedlist<FString *> tokenize() const;
+	FString *token(int i) const;
+	int count_tokens() const;
+
+	//concatenation
+	FString & concat(const FString & f);
+
+	//Overloaded operators
 	bool operator==(FString & f);
 	bool operator!=(FString & f);
-
 	friend std::ostream & operator<<(std::ostream & os, const FString s);
 };
 

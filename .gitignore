@@ -11,4 +11,4 @@
 test_bst
 test_liblinkedlist
 test_fstring
-
+test_logger

@@ -108,3 +108,30 @@ BOOST_AUTO_TEST_CASE( test_token ) {
     BOOST_CHECK(strcmp(f5.token(5)->cstring(), "tokentoken6") == 0 );
     
 }
+
+BOOST_AUTO_TEST_CASE( test_concat1 ) {
+    std::cout << "Testing concatenate two strings." << std::endl;
+
+    FString f1 = FString("token1");
+    FString f2 = FString("token2");
+    
+    f1.concat( f2 );
+
+    FString f3 = FString("token1token2");
+    BOOST_CHECK(f1 == f3);
+}
+
+BOOST_AUTO_TEST_CASE( test_concat2 ) {
+    std::cout << "Testing concatentate multiple strings." << std::endl;
+
+    FString f1 = FString("token1");
+    FString f2 = FString(" token2 ");
+    FString f3 = FString("!!!TOKEN3!!!");
+    FString f4 = FString("     ");
+ 
+    FString f5 = FString("token1 token2 !!!TOKEN3!!!     ");
+
+    f1.concat( f2 ).concat( f3 ).concat( f4 );
+    
+    BOOST_CHECK(f1 == f5);
+}
