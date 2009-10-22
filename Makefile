@@ -10,7 +10,7 @@ BOOST_LDFLAGS = -lboost_unit_test_framework
 VPATH = lib include tests
 
 .PHONY: all check clean
-all: fstring.a
+all: flib.a
 
 logger.o: logger.cpp logger.h
 fstring.o: fstring.cpp fstring.h
