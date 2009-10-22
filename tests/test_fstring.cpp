@@ -16,6 +16,7 @@
 
 BOOST_AUTO_TEST_CASE( test_constructor1 ) {
     std::cout << "Testing empty constructor." << std::endl;
+
     FString f1; 
 
     BOOST_CHECK(f1.size() == 0);
@@ -23,13 +24,16 @@ BOOST_AUTO_TEST_CASE( test_constructor1 ) {
 
 BOOST_AUTO_TEST_CASE( test_constructor2 ) {
     std::cout << "Testing cstring constructor." << std::endl;
+
     FString f1 = FString("test");
 
+    BOOST_CHECK(f1.size() == 4);
     BOOST_CHECK(strcmp(f1.cstring(), "test") == 0);
 }
 
 BOOST_AUTO_TEST_CASE( test_constructor3 ) {
     std::cout << "Testing bounded cstring constructor." << std::endl;
+
     FString f1 = FString("testtest", 4);
 
     BOOST_CHECK(f1.size() == 4);
@@ -65,18 +69,20 @@ BOOST_AUTO_TEST_CASE( test_tokenize1 ) {
 
 BOOST_AUTO_TEST_CASE( test_tokenize2 ) {
     std::cout << "Testing tokenize single token." << std::endl;
+
     FString f2("token");
-    std::cout << "f2 stuff:\"" << f2 << "\"" << std::endl;
     Linkedlist<FString *> f2_tokens = f2.tokenize();
+
     BOOST_CHECK(f2_tokens.size() == 1);
-    std::cout << "f2->cstring() stuff: \"" << f2_tokens.get(0)->cstring() << "\"" << std::endl;
     BOOST_CHECK(strcmp(f2_tokens.get(0)->cstring(), "token") == 0 );
 }
 
 BOOST_AUTO_TEST_CASE( test_tokenize3 ) {
     std::cout << "Testing tokenize two tokens." << std::endl;
+
     FString f3("token token");
     Linkedlist<FString *> f3_tokens = f3.tokenize();
+    
     BOOST_CHECK(f3_tokens.size() == 2);
     BOOST_CHECK(strcmp(f3_tokens.get(0)->cstring(), "token") == 0 );
     BOOST_CHECK(strcmp(f3_tokens.get(1)->cstring(), "token") == 0 );
@@ -84,8 +90,10 @@ BOOST_AUTO_TEST_CASE( test_tokenize3 ) {
 
 BOOST_AUTO_TEST_CASE( test_tokenize4 ) {
     std::cout << "Testing tokenize multiple tokens, fugly string." << std::endl;
+
     FString f4("  token1     token2	    token3 token4 t5 tokentoken6");
     Linkedlist<FString *> f4_tokens = f4.tokenize();
+    
     BOOST_CHECK(f4_tokens.size() == 6);
 
     BOOST_CHECK(strcmp(f4_tokens.get(0)->cstring(), "token1") == 0 );
@@ -98,6 +106,7 @@ BOOST_AUTO_TEST_CASE( test_tokenize4 ) {
 
 BOOST_AUTO_TEST_CASE( test_token ) {
     std::cout << "Testing named token." << std::endl;
+
     FString f5("  token1     token2	    token3 token4 t5 tokentoken6");
 
     BOOST_CHECK(strcmp(f5.token(0)->cstring(), "token1") == 0 );

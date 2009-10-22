@@ -134,7 +134,7 @@ BOOST_AUTO_TEST_CASE(test_rm_single) {
 
 BOOST_AUTO_TEST_CASE(test_large_dataset) {
     std::cout << "Testing a very large dataset. This could take a while." << std::endl;
-    const int dataset_size = 5000;
+    const int dataset_size = 1000;
     Linkedlist<int> test_linkedlist;
 
     for(int i = 1; i <= dataset_size; i++) {

@@ -6,30 +6,36 @@
 #define LOGGER_H
 
 #include <iostream>
+#include <fstream>
 
 class Logger {
     public:
-	//Typedefs
+    //Typedefs
 	typedef short unsigned int loglevel_t;
 
-	//Operations
+    //Operations
+	//Generate log message
 	void log(loglevel_t level, const char *message);
+	//Set current logging level
 	loglevel_t & level();
+	//Retrieve singleton instance
 	static Logger *inst();
+	//Set ostream
+	void ostream(std::ostream *new_log_ostream);
 
 	//Destructors
 	~Logger();
 
     private:
 
-	//Constructors
+    //Constructors
 	Logger();
 
-	//Members
+    //Members
 	static Logger *m_logger_instance;
 	static loglevel_t m_level;
 	static const char *m_levels[];
-
+	static std::ostream *m_log_ostream;
 };
 
 #endif

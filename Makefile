@@ -38,9 +38,9 @@ liblinkedlist.a: liblinkedlist.h node.h listexception.h
 	$(AR) $(ARFLAGS) $@ $^
 
 check: test_fstring test_liblinkedlist test_bst test_logger
-	./test_fstring
 	./test_liblinkedlist
 	./test_bst
+	./test_fstring
 	./test_logger
 
 clean:
