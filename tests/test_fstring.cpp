@@ -135,7 +135,7 @@ BOOST_AUTO_TEST_CASE( test_concat1_fstring ) {
 }
 
 BOOST_AUTO_TEST_CASE( test_concat2_fstring ) {
-    std::cout << "Testing concatentate multiple fstrings." << std::endl;
+    std::cout << "Testing concatenate multiple fstrings." << std::endl;
 
     FString f1 = FString("token1");
     FString f2 = FString(" token2 ");
@@ -162,7 +162,7 @@ BOOST_AUTO_TEST_CASE( test_concat1_cstring ) {
 }
 
 BOOST_AUTO_TEST_CASE( test_concat2_cstring ) {
-    std::cout << "Testing concatentate fstring and multiple cstrings." << std::endl;
+    std::cout << "Testing concatenate fstring and multiple cstrings." << std::endl;
 
     FString f1 = FString("token1");
     const char *c2 = " token2 ";

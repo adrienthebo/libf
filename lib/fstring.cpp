@@ -51,11 +51,10 @@ int FString::size() const {
 }
 
 //Returns a cstring copy of the fstring
-//TODO m_length-ify this
 char *FString::cstring() const {
-    char *c_string = new char[ strlen(m_string)];
+    char *c_string = new char[ m_length + 1 ]; //Grab the null pointer and copy that too
 
-    strcpy(c_string, m_string);
+    strncpy(c_string, m_string, m_length + 1);
 
     return c_string;
 }
