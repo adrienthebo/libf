@@ -9,7 +9,11 @@
 #include <boost/test/unit_test.hpp>
 
 #include <iostream>
+#include <sstream>
+
 #include <cstring>
+#include <string>
+
 #include "../include/fstring.h"
 #include "../include/liblinkedlist.h"
 
@@ -118,8 +122,8 @@ BOOST_AUTO_TEST_CASE( test_token ) {
     
 }
 
-BOOST_AUTO_TEST_CASE( test_concat1 ) {
-    std::cout << "Testing concatenate two strings." << std::endl;
+BOOST_AUTO_TEST_CASE( test_concat1_fstring ) {
+    std::cout << "Testing concatenate two fstrings." << std::endl;
 
     FString f1 = FString("token1");
     FString f2 = FString("token2");
@@ -130,8 +134,8 @@ BOOST_AUTO_TEST_CASE( test_concat1 ) {
     BOOST_CHECK(f1 == f3);
 }
 
-BOOST_AUTO_TEST_CASE( test_concat2 ) {
-    std::cout << "Testing concatentate multiple strings." << std::endl;
+BOOST_AUTO_TEST_CASE( test_concat2_fstring ) {
+    std::cout << "Testing concatentate multiple fstrings." << std::endl;
 
     FString f1 = FString("token1");
     FString f2 = FString(" token2 ");
@@ -144,3 +148,128 @@ BOOST_AUTO_TEST_CASE( test_concat2 ) {
     
     BOOST_CHECK(f1 == f5);
 }
+
+BOOST_AUTO_TEST_CASE( test_concat1_cstring ) {
+    std::cout << "Testing concatenate fstring and cstring." << std::endl;
+
+    FString f1 = FString("token1");
+    const char *c1 = "token2";
+    
+    f1.concat( c1 );
+
+    FString f2 = FString("token1token2");
+    BOOST_CHECK(f1 == f2);
+}
+
+BOOST_AUTO_TEST_CASE( test_concat2_cstring ) {
+    std::cout << "Testing concatentate fstring and multiple cstrings." << std::endl;
+
+    FString f1 = FString("token1");
+    const char *c2 = " token2 ";
+    const char *c3 = "!!!TOKEN3!!!";
+    const char *c4 = "     ";
+ 
+    FString f2= FString("token1 token2 !!!TOKEN3!!!     ");
+
+    f1.concat( c2 ).concat( c3 ).concat( c4 );
+    
+    BOOST_CHECK(f1 == f2);
+}
+
+BOOST_AUTO_TEST_CASE( test_concat3_char) {
+    std::cout << "Testing concatenate fstring and char." << std::endl;
+
+    FString f1 = FString("token");
+    FString f2 = FString("token1");
+    char c = '1';
+
+    f1.concat(c);
+
+    BOOST_CHECK(f1.size() == 6);
+    BOOST_CHECK(f1 == f2);
+}
+
+BOOST_AUTO_TEST_CASE( test_clear ) {
+    std::cout << "Testing clear." << std::endl;
+    
+    FString f1("token1 token2 token3    token4		token5");
+    FString f2;
+
+    f1.clear();
+    f2.clear();
+
+    BOOST_CHECK(f1.size() == 0);
+    BOOST_CHECK(f2.size() == 0);
+
+}
+
+BOOST_AUTO_TEST_CASE( test_extraction1 ) {
+    std::cout << "Testing extraction operator with empty string." << std::endl;
+
+    std::istringstream input_stream;
+    FString f1;
+    FString f2;
+
+    input_stream.str() = "";
+    input_stream >> f1;
+
+    BOOST_CHECK(f1.size() == 0);
+    BOOST_CHECK(f1 == f2);
+}
+
+BOOST_AUTO_TEST_CASE( test_extraction2) {
+    std::cout << "Testing extraction operator with simple string." << std::endl;
+
+    std::istringstream input_stream;
+    FString f3;
+    FString f4 = FString("token1");
+
+    input_stream.str("token1");
+    input_stream >> f3;
+
+    BOOST_CHECK(f3.size() == 6);
+    BOOST_CHECK(f3 == f4);
+}
+
+BOOST_AUTO_TEST_CASE( test_extraction3) {
+    std::cout << "Testing extraction operator with more complex string." << std::endl;
+
+    std::istringstream input_stream;
+    FString f5;
+    FString f6 = FString("token1 token2");
+
+    input_stream.str("token1 token2");
+    input_stream >> f5;
+
+    BOOST_CHECK(f5.size() == 13);
+    BOOST_CHECK(f5 == f6);
+}
+
+BOOST_AUTO_TEST_CASE( test_extraction4 ) {
+    std::cout << "Testing extraction operator with even more complex string." << std::endl;
+
+    std::istringstream input_stream;
+    FString f7;
+    FString f8 = FString("token1 token2 token3 token4");
+
+    input_stream.str("token1 token2 token3 token4");
+    input_stream >> f7;
+
+    BOOST_CHECK(f7.size() == 27 );
+    BOOST_CHECK(f7 == f8);
+}
+
+BOOST_AUTO_TEST_CASE( test_extraction5 ) {
+    std::cout << "Testing extraction operator with fugly string." << std::endl;
+
+    std::istringstream input_stream;
+    FString f9;
+    FString f10 = FString("   token1 token2  token3	token4 token5  ");
+
+    input_stream.str("   token1 token2  token3	token4 token5  ");
+    input_stream >> f9;
+
+    BOOST_CHECK(f9.size() == 40);
+    BOOST_CHECK(f9 == f10);
+}
+

@@ -6,7 +6,6 @@
 #define LOGGER_H
 
 #include <iostream>
-#include <fstream>
 
 class Logger {
     public:
