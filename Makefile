@@ -9,17 +9,25 @@ BOOST_LDFLAGS = -lboost_unit_test_framework
 
 VPATH = lib include tests
 
-.PHONY: all check clean
+.PHONY: all tests check clean
+
 all: flib.a
 
+# Library archive
+flib.a: fstring.o logger.o
+	$(AR) $(ARFLAGS) $@ $^
+
+# Library implementations
 logger.o: logger.cpp logger.h
 fstring.o: fstring.cpp fstring.h
 
+# Test applications
 test_fstring.o: test_fstring.cpp
 test_logger.o: test_logger.cpp
 test_linkedlist.o: test_linkedlist.cpp
 test_bst.o: test_bst.cpp
 
+# Test binaries
 test_bst: test_bst.o
 	$(CC) $(LDFLAGS) $(BOOST_LDFLAGS) -o $@ $^
 test_fstring: fstring.o test_fstring.o
@@ -30,19 +38,16 @@ test_logger: logger.o test_logger.o
 	$(CC) $(LDFLAGS) $(BOOST_LDFLAGS) -o $@ $^
 
 
-flib.a: fstring.o logger.o
-	$(AR) $(ARFLAGS) $@ $^
+# compiling and running all tests
+tests: test_fstring test_liblinkedlist test_bst test_logger
 
-# This is pretty much worthless
-liblinkedlist.a: liblinkedlist.h node.h listexception.h 
-	$(AR) $(ARFLAGS) $@ $^
-
-check: test_fstring test_liblinkedlist test_bst test_logger
+check: tests
 	./test_liblinkedlist
 	./test_bst
 	./test_fstring
 	./test_logger
 
+# HI, BILLY MAYS HERE WITH OXY CLEAN
 clean:
 	rm -f fstring.o \
 	    logger.o;
