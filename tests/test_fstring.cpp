@@ -47,7 +47,7 @@ BOOST_AUTO_TEST_CASE( test_constructor3 ) {
 BOOST_AUTO_TEST_CASE( test_constructor4 ) {
     std::cout << "Testing copy constructor." << std::endl;
     FString f1 = FString("test");
-    FString copy_fstring = FString(f1);
+    FString copy_fstring(f1);
 
     BOOST_CHECK(f1.size() == copy_fstring.size());
     BOOST_CHECK(strcmp(f1.cstring(), copy_fstring.cstring()) == 0);
@@ -273,3 +273,31 @@ BOOST_AUTO_TEST_CASE( test_extraction5 ) {
     BOOST_CHECK(f9 == f10);
 }
 
+BOOST_AUTO_TEST_CASE( test_assignment_operator1 ) {
+    std::cout << "Testing empty assignment operator" << std::endl;
+
+    FString f1;
+    FString f2;
+    FString f3 = FString("token1");
+
+    f2 = f1;
+    f3 = f1;
+
+    BOOST_CHECK(f1.size() == 0);
+    BOOST_CHECK(f2.size() == 0);
+    BOOST_CHECK(f3.size() == 0);
+    BOOST_CHECK(f1 == f2);
+    BOOST_CHECK(f1 == f3);
+}
+
+BOOST_AUTO_TEST_CASE( test_assignment_operator2 ) {
+    std::cout << "Testing assignment operator." << std::endl;
+
+    FString f1 = FString("token1");
+    FString f2 = FString("token2 token3");
+
+    f1 = f2;
+
+    BOOST_CHECK(f1.size() == 13);
+    BOOST_CHECK(f1 == f2);
+}

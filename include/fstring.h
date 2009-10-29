@@ -37,6 +37,8 @@ class FString {
 	friend std::ostream & operator<<(std::ostream & os, const FString & f);
 	friend std::istream & operator>>(std::istream & is, FString & f);
 	
+	FString & operator=(const FString & f);
+
 	//Misc
 	void clear();
 };

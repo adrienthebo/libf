@@ -28,7 +28,8 @@ FString::FString(const FString & f) {
     m_length = f.m_length;
     m_string = new char[m_length + 1];
 
-    strncpy(m_string, f.m_string, m_length + 1);
+    strncpy(m_string, f.m_string, m_length);
+    *(m_string + m_length) = '\0';
 }
 
 //Bounded cstring constructor (only copy (int)length elements)
@@ -87,6 +88,20 @@ std::istream & operator>>(std::istream & is, FString & f) {
 	}
     }
     return is;
+}
+
+//Overloaded assignment operator
+FString & FString::operator=(const FString & f) {
+    
+    delete[] m_string;
+
+    m_length = f.m_length;
+    m_string = new char[ m_length + 1];
+
+    strncpy(m_string, f.m_string, m_length);
+    *(m_string + m_length) = '\0';
+
+    return *this;
 }
 
 //This function may or may not leak like a sieve
