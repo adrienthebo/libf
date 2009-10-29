@@ -2,7 +2,8 @@
 #define FSTRING_H
 
 #include <iostream>
-#include "liblinkedlist.h"
+#include <cstring>
+#include "linkedlist.h"
 
 class FString {
     private:

@@ -6,7 +6,6 @@
  * us to lose thousands of years of our lives digging through glibc backtraces.
  */
 #include "../include/fstring.h"
-#include <cstring>
 
 //Default constructor
 FString::FString() {

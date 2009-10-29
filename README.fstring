@@ -1,1 +1,4 @@
-Nothing to read about yet. Go read yourself a header file.
+The FString class is based around char arrays. The length of strings is tracked
+manually, to cut down on some of the computation. It's a minor thing; the main
+reason to track length is for sanity purposes. Blindly calling strlen() 
+somehow scrambled my thought processes.

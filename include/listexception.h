@@ -1,6 +1,6 @@
 /* listexception.h
  *
- * Exceptions for liblinkedlist.
+ * Exceptions for linkedlist.h
  */
 
 #ifndef _LISTEXCEPTION_H_

@@ -11,10 +11,10 @@ VPATH = lib include tests
 
 .PHONY: all tests check clean
 
-all: flib.a
+all: libf.a
 
 # Library archive
-flib.a: fstring.o logger.o
+libf.a: fstring.o logger.o
 	$(AR) $(ARFLAGS) $@ $^
 
 # Library implementations
@@ -32,17 +32,17 @@ test_bst: test_bst.o
 	$(CC) $(LDFLAGS) $(BOOST_LDFLAGS) -o $@ $^
 test_fstring: fstring.o test_fstring.o
 	$(CC) $(LDFLAGS) $(BOOST_LDFLAGS) -o $@ $^ 
-test_liblinkedlist: test_linkedlist.o
+test_linkedlist: test_linkedlist.o
 	$(CC) $(LDFLAGS) $(BOOST_LDFLAGS) -o $@ $^
 test_logger: logger.o test_logger.o
 	$(CC) $(LDFLAGS) $(BOOST_LDFLAGS) -o $@ $^
 
 
 # compiling and running all tests
-tests: test_fstring test_liblinkedlist test_bst test_logger
+tests: test_fstring test_linkedlist test_bst test_logger
 
 check: tests
-	./test_liblinkedlist
+	./test_linkedlist
 	./test_bst
 	./test_fstring
 	./test_logger
@@ -53,10 +53,10 @@ clean:
 	    logger.o;
 	rm -f \
 	    test_fstring \
-	    test_liblinkedlist \
+	    test_linkedlist \
 	    test_bst \
 	    test_logger ;
-	rm -f flib.a;
+	rm -f libf.a;
 	rm -f \
 	    test_fstring.o \
 	    test_logger.o \

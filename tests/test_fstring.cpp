@@ -15,7 +15,7 @@
 #include <string>
 
 #include "../include/fstring.h"
-#include "../include/liblinkedlist.h"
+#include "../include/linkedlist.h"
 
 
 BOOST_AUTO_TEST_CASE( test_constructor1 ) {

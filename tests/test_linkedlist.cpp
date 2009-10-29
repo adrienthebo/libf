@@ -12,7 +12,7 @@
 
 #include <iostream>
 #include <fstream>
-#include "../include/liblinkedlist.h"
+#include "../include/linkedlist.h"
 
 BOOST_AUTO_TEST_CASE( test_is_empty_stage0) {
     std::cout << "Verifying some basic functions are sane." << std::endl;

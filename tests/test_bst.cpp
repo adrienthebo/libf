@@ -1,14 +1,14 @@
 /* test_bst.cpp
  *
- * Test suite for libbst.
+ * Test suite for bst.
  */
 
-#define BOOST_TEST_MODULE "libbst test module"
+#define BOOST_TEST_MODULE "bst test module"
 #define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
 
 #include <iostream>
-#include "../include/libbst.h"
+#include "../include/bst.h"
 
 BOOST_AUTO_TEST_CASE( test_sanity ) {
     std::cout << "Verifying some basic functions are sane." << std::endl;
