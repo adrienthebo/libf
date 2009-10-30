@@ -28,13 +28,19 @@ class Bst {
 		    current_node->right() = new_node; 
 		}
 	    }
-	    else { //Left subtree
+	    else if (new_node->key() < current_node->key()) { //Left subtree
 		if(current_node->left() != NULL) { //Recurse onto left subtree
 		    r_add(new_node, current_node->left());
 		}
 		else { //New left subtree, append.
 		    current_node->left() = new_node;
 		}
+	    }
+	    else { //Duplicate key
+		current_node->data() = new_node->data();
+		//Remove extra node, and decrement size since add() will increment it.
+		delete new_node;
+		m_size--;
 	    }
 	}
 
