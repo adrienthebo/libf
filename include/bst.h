@@ -60,10 +60,10 @@ class Bst {
 		m_root = NULL;
 	    }
 	    else if(parent->left() == old_node) { //Delete left child
-		parent->left() == NULL;
+		parent->left() = NULL;
 	    }
 	    else { //Delete right child
-		parent->right() == NULL;
+		parent->right() = NULL;
 	    }
 	}
 
