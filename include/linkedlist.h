@@ -8,7 +8,6 @@
 #include "listexception.h"
 #include <cstdlib>
 #include <iostream>
-#include <fstream>
 
 template<class T>
 class Linkedlist {
@@ -36,7 +35,7 @@ class Linkedlist {
 	    Node<T> *current_node = m_head;
 
 	    while(current_node != NULL) {
-		Node<T> *next_node = current_node->get_next();
+		Node<T> *next_node = current_node->next();
 		
 		delete current_node;
 
@@ -49,8 +48,7 @@ class Linkedlist {
 	 * @param data the template data to add
 	 * @param position the position to add the data
 	 *
-	 * @throws list_index_out_of_bounds if position is out of the bounds
-	 *	    of the linkedlist
+	 * @throws list_index_out_of_bounds if position is out of bounds
 	 */
 	void add(T data, int position) throw(list_index_out_of_bounds) {
 	    // Bounds check
@@ -64,56 +62,74 @@ class Linkedlist {
 	    else {
 		Node<T> *current_node = m_head;
 		for(int i = 0; i + 1 < position; i++) //Locate node before insertion
-		    current_node = current_node->get_next();
+		    current_node = current_node->next();
 		
-		current_node->set_next(new Node<T>(data, current_node->get_next()));
+		current_node->next() = new Node<T>(data, current_node->next());
 	    }
 	    m_size++;
 	}
 
-	/* Appends data to the end of the list */
+	/**
+	 * Appends data to the end of the list 
+	 *
+	 * @param data the template data to add
+	 *
+	 * @throws list_index_out_of_bounds if position is out of bounds
+	 */
 	void add(T data) throw(list_index_out_of_bounds) {
 	    add(data, m_size);
 	}
 
-	/* Retrieves the node specified at position */
-	T get(int position) throw(list_index_out_of_bounds) {
+	/** 
+	 * Retrieves the node specified at position
+	 *
+	 * @param position the index of the data to retrieve
+	 *
+	 * @throws list_index_out_of_bounds if position is out of bounds
+	 */
+	T & get(int position) throw(list_index_out_of_bounds) {
 	    if(position < 0 || position >= m_size) 
 		throw list_index_out_of_bounds(position);
 
 	    Node<T> *current_node = m_head;
 	    for(int i = 0; i < position; i++) {
-		current_node = current_node->get_next();
+		current_node = current_node->next();
 	    }
 	    
 	    if(current_node == NULL) 
 		throw "Critical error; null pointer found where no null pointer should be!";
 
-	    return current_node->get_data();
+	    return current_node->data();
 	}
 
-	/* Removes the node specified by position */
+	/**
+	 * Removes the template data specified by position 
+	 *
+	 * @param position the index of the data to remove
+	 *
+	 * @throws list_index_out_of_bounds if position is out of bounds 
+	 */
 	void rm(int position) throw(list_index_out_of_bounds) {
 	    if(position < 0 || position >= m_size) 
 		throw list_index_out_of_bounds(position);
 	    
 	    if(position == 0) {
 		Node<T> *to_delete = m_head;
-		m_head = to_delete->get_next();
+		m_head = to_delete->next();
 
 		delete to_delete;
 	    }
 	    else {
 		Node<T> *current_node = m_head;
 		for(int i = 0; i + 1 < position; i++) {
-		    current_node = current_node->get_next();
+		    current_node = current_node->next();
 		}
 		
 		if(current_node == NULL) 
 		    throw "Critical error; null pointer found where no null pointer should be!";
 
-		Node<T> *to_delete = current_node->get_next();
-		current_node->set_next(to_delete->get_next());
+		Node<T> *to_delete = current_node->next();
+		current_node->next() = to_delete->next();
 		delete to_delete;
 	    }
 	    m_size--;
@@ -124,20 +140,6 @@ class Linkedlist {
 	}
 	int size() {
 	    return m_size;
-	}
-
-	void freeze( std::ofstream & output ) {
-	    for(int i = 0; i < m_size; i++) {
-		output << get(i) << '\n';
-	    }
-	}
-	void thaw( std::ifstream & input ) {
-	    while(!input.eof() ) {
-		std::string instring;
-		input >> instring;
-		if(instring.length() > 0) 
-		    add(atoi(instring.c_str()));
-	    }
 	}
 
 	friend std::ostream &operator<< (std::ostream & os, Linkedlist<T> & list) {

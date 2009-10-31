@@ -152,36 +152,6 @@ BOOST_AUTO_TEST_CASE(test_large_dataset) {
     BOOST_CHECK(test_linkedlist.is_empty());
 }
 
-BOOST_AUTO_TEST_CASE(test_freeze_thaw) {
-    std::cout << "Testing serialization." << std::endl;
-    remove("test_serialize.bin");
-
-    Linkedlist<int> test_linkedlist;
-    std::ofstream fout("test_serialize.bin");
-    
-    for(int i = 0; i < 100; i++) {
-	test_linkedlist.add(i);
-    }
-    
-    BOOST_CHECK(test_linkedlist.size() == 100);
-    test_linkedlist.freeze(fout);
-    fout.flush();
-    fout.close();
-
-    std::cout << "Testing unserialization." << std::endl;
-    Linkedlist<int> test_linkedlist2;
-    std::ifstream fin("test_serialize.bin");
-
-    BOOST_CHECK(test_linkedlist2.size() == 0);
-    test_linkedlist2.thaw(fin);
-    BOOST_CHECK(test_linkedlist2.size() == 100);
-    
-    for(int i = 0; i < test_linkedlist2.size(); i++) {
-	BOOST_CHECK(test_linkedlist2.get(i) == i);
-    }
-    remove("test_serialize.bin");
-}
-
 BOOST_AUTO_TEST_CASE( test_exceptions ) {
     std::cout << "Testing exception throwing and handling." << std::endl;
 

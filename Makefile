@@ -41,7 +41,7 @@ test_dlinkedlist: test_dlinkedlist.o
 	$(CC) $(LDFLAGS) $(BOOST_LDFLAGS) -o $@ $^
 
 
-# compiling and running all tests
+# compiling all tests
 tests: test_fstring test_linkedlist test_bst test_logger test_dlinkedlist
 
 check: tests
@@ -68,3 +68,4 @@ clean:
 	    test_linkedlist.o \
 	    test_bst.o \
 	    test_dlinkedlist.o;
+

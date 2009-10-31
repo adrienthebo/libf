@@ -33,20 +33,12 @@ class Node {
 	    m_next = NULL;
 	}
 
-	T get_data() {
+	T & data() {
 	    return m_data;
 	}
-
-	void set_data(T data) {
-	    m_data = data;
-	}
 	
-	Node *get_next() {
+	Node *& next() {
 	    return m_next;
-	}
-
-	void set_next(Node *next) {
-	    m_next = next;
 	}
 };
 
