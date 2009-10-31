@@ -9,23 +9,29 @@
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
-#include <string>
 
 template<class T>
 class Linkedlist {
     private:
 	Node<T> *m_head;
-	/* Size is tracked instead of being dynamically calculated because
-	 * large linked lists really bog down when iterating over the entire
-	 * list. Makes more sense to keep track of this instead of recounting.
-	 */
 	int m_size; 
     public:
+
+	/**
+	 * Default constructor
+	 *
+	 * Creates an empty linkedlist
+	 */
 	Linkedlist() {
 	    m_head = NULL;
 	    m_size = 0;
 	}
-
+	
+	/**
+	 * Destructor
+	 *
+	 * Deallocates all memory in the linkedlist.
+	 */
 	~Linkedlist() {
 	    Node<T> *current_node = m_head;
 
@@ -39,7 +45,13 @@ class Linkedlist {
 	    m_head = NULL;
 	}
 
-	/* Inserts the data at the specified position */
+	/**
+	 * @param data the template data to add
+	 * @param position the position to add the data
+	 *
+	 * @throws list_index_out_of_bounds if position is out of the bounds
+	 *	    of the linkedlist
+	 */
 	void add(T data, int position) throw(list_index_out_of_bounds) {
 	    // Bounds check
 	    if( position < 0 || position > m_size)

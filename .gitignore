@@ -9,6 +9,7 @@
 
 # Ignore test applications
 test_bst
-test_liblinkedlist
+test_linkedlist
 test_fstring
 test_logger
+test_dlinkedlist

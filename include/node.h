@@ -1,6 +1,6 @@
 /* node.h 
  *
- * Node definition for liblinkedlist. Nothing interesting here.
+ * Definition for a node in a linear linked list.
  */
 #ifndef NODE_H_
 #define NODE_H_

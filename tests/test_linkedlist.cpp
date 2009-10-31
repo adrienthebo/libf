@@ -5,7 +5,7 @@
  */
 
 /* Magically create main() and init_unit_test() functions */
-#define BOOST_TEST_MODULE "liblinkedlist main test suite"
+#define BOOST_TEST_MODULE "linkedlist main test suite"
 /* Specify dynamic linking with test lib */
 #define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
