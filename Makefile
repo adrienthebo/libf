@@ -19,7 +19,7 @@ libf.a: fstring.o logger.o
 
 # Library implementations
 logger.o: logger.cpp logger.h
-fstring.o: fstring.cpp fstring.h
+fstring.o: fstring.cpp fstring.h linkedlist.h linkedlist.cpp
 
 # Test applications
 test_fstring.o: test_fstring.cpp fstring.h

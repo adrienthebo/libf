@@ -1,6 +1,7 @@
 /* dnode.h
  * 
- * Definition for a doubly linked node.
+ * Definition for a doubly linked node. It's basically a glorified struct.
+ *
  */
 
 #ifndef DNODE_H
