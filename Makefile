@@ -23,10 +23,10 @@ fstring.o: fstring.cpp fstring.h linkedlist.h linkedlist.cpp
 
 # Test applications
 test_fstring.o: test_fstring.cpp fstring.h
-test_logger.o: test_logger.cpp linkedlist.h
-test_linkedlist.o: test_linkedlist.cpp linkedlist.h
-test_bst.o: test_bst.cpp bst.h
-test_dlinkedlist.o: test_dlinkedlist.cpp dlinkedlist.h
+test_logger.o: test_logger.cpp linkedlist.h linkedlist.cpp
+test_linkedlist.o: test_linkedlist.cpp linkedlist.h linkedlist.cpp
+test_bst.o: test_bst.cpp bst.h bst.cpp
+test_dlinkedlist.o: test_dlinkedlist.cpp dlinkedlist.h 
 
 # Test binaries
 test_bst: test_bst.o

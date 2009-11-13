@@ -1,5 +1,5 @@
 /* linkedlist.h 
- * Implements a template linear linked list.
+ * Defines a template linear linked list.
  */
 #ifndef LINKEDLIST_H_
 #define LINKEDLIST_H_
