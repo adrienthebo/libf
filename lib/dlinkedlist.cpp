@@ -123,7 +123,7 @@ void DLinkedlist<T>::add(T data) throw(list_index_out_of_bounds) {
  * @throws list_index_out_of_bounds if position is out of bounds
  */
 template<class T>
-T & DLinkedlist<T>::get(int position) {
+T & DLinkedlist<T>::get(int position) const {
     if(position < 0 || (unsigned int)position >= m_size) {
 	throw list_index_out_of_bounds(position);
     }
@@ -157,5 +157,26 @@ void DLinkedlist<T>::rm(int position) throw(list_index_out_of_bounds) {
     }
 
     connect(to_delete->prev(), to_delete->next());
+    delete(to_delete);
     m_size--;
 }
+
+template<class T>
+void DLinkedlist<T>::clear() {
+    while(size() != 0) {
+	rm(0);
+    }
+}
+
+template<class T>
+DLinkedlist<T> & DLinkedlist<T>::operator=(const DLinkedlist & copy_linkedlist) {
+    
+    clear();
+
+    for(int i = 0; i < copy_linkedlist.size(); i++ ) {
+	add(copy_linkedlist.get(i));
+    }
+
+    return *this;
+}
+

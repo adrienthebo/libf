@@ -22,15 +22,18 @@ class DLinkedlist {
 	DLinkedlist(); 
 	DLinkedlist(const DLinkedlist & copy_linkedlist);
 	~DLinkedlist();
+
+	DLinkedlist<T> & operator=(const DLinkedlist & copy_linkedlist);
 	
 	int size() const;
 
 	void add(T data, int position) throw(list_index_out_of_bounds);
 	void add(T data) throw(list_index_out_of_bounds); 
 
-	T & get(int position); 
+	T & get(int position) const; 
 
 	void rm(int position) throw(list_index_out_of_bounds);
+	void clear();
 };
 
 #include "../lib/dlinkedlist.cpp"

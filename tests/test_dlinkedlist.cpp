@@ -148,6 +148,82 @@ BOOST_AUTO_TEST_CASE( test_rm2 ) {
     }
 }
 
-BOOST_AUTO_TEST_CASE( test_assignment_operator) {
-    std::cout << "Testing assignment operator." << std::endl;
+BOOST_AUTO_TEST_CASE( test_clear1 ) {
+    std::cout << "Testing clear empty list." << std::endl;
+
+    DLinkedlist<int> d1;
+
+    BOOST_CHECK(d1.size() == 0);
+    d1.clear();
+    BOOST_CHECK(d1.size() == 0);
 }
+
+BOOST_AUTO_TEST_CASE( test_clear2) {
+    std::cout << "Testing clear populated list." << std::endl;
+
+    DLinkedlist<int> d2;
+
+    d2.add(0);
+    d2.add(0);
+    d2.add(0);
+    d2.add(0);
+    d2.add(0);
+    d2.add(0);
+    d2.add(0);
+    d2.add(0);
+    d2.add(0);
+    d2.add(0);
+    BOOST_CHECK(d2.size() == 10);
+    d2.clear();
+    BOOST_CHECK(d2.size() == 0);
+}
+
+BOOST_AUTO_TEST_CASE( test_assignment_operator1 ) {
+    std::cout << "Testing assignment operator with empty lists." << std::endl;
+
+    DLinkedlist<int> d1;
+    DLinkedlist<int> d2;
+
+    d1 = d2;
+
+    BOOST_CHECK(d1.size() == d2.size());
+}
+
+BOOST_AUTO_TEST_CASE( test_assignment_operator2 ) {
+    std::cout << "Testing assignment operator with populated lists." << std::endl;
+    
+    DLinkedlist<int> d3;
+    DLinkedlist<int> d4;
+
+    d3.add(0);
+    d3.add(1);
+    d3.add(2);
+    d3.add(3);
+    d3.add(4);
+    d3.add(5);
+    d3.add(6);
+    d3.add(7);
+    d3.add(8);
+    d3.add(9);
+
+    BOOST_CHECK(d3.size() == 10);
+    BOOST_CHECK(d4.size() == 0);
+
+    d4 = d3;
+
+    BOOST_CHECK(d3.size() == 10);
+    BOOST_CHECK(d4.size() == 10);
+
+    BOOST_CHECK(d4.get(0) == 0);
+    BOOST_CHECK(d4.get(1) == 1);
+    BOOST_CHECK(d4.get(2) == 2);
+    BOOST_CHECK(d4.get(3) == 3);
+    BOOST_CHECK(d4.get(4) == 4);
+    BOOST_CHECK(d4.get(5) == 5);
+    BOOST_CHECK(d4.get(6) == 6);
+    BOOST_CHECK(d4.get(7) == 7);
+    BOOST_CHECK(d4.get(8) == 8);
+    BOOST_CHECK(d4.get(9) == 9);
+    
+}
+
