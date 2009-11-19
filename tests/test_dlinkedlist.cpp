@@ -147,3 +147,7 @@ BOOST_AUTO_TEST_CASE( test_rm2 ) {
 	BOOST_CHECK(d2.size() == i);
     }
 }
+
+BOOST_AUTO_TEST_CASE( test_assignment_operator) {
+    std::cout << "Testing assignment operator." << std::endl;
+}

@@ -13,7 +13,7 @@ template <class T>
 class DNode {
 
     private:
-	T m_data;
+	T *m_data;
 	DNode *m_prev;
 	DNode *m_next;
 
@@ -26,26 +26,26 @@ class DNode {
 	    m_next = NULL;
 	}
 
-	//Copy constructor, of the shallow variety
+	//Deep copy constructor
 	DNode<T>(const DNode<T> & n) {
-	    m_data = n.m_data;
+	    m_data = new T(*(n.m_data));
 	    m_prev = n.m_prev;
 	    m_next = n.m_next;
 	}
 	
 	DNode<T>(T data) {
-	    m_data = data;
+	    m_data = new T(data);
 	    m_prev = NULL;
 	    m_next = NULL;
 	}
 
 	~DNode() {
-	    m_data = NULL;
+	    delete(m_data);
 	    m_prev = NULL;
 	    m_next = NULL;
 	}
 	    
-	T & data() {
+	T *& data() {
 	    return m_data;
 	}
 

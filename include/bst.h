@@ -29,9 +29,6 @@ class Bst {
 	void rm_left_subtree(TreeNode<T> *old_node, TreeNode<T> *parent);
 	void rm_both_subtrees(TreeNode<T> *old_node, TreeNode<T> *parent);
 
-	int size_by_count(TreeNode<T> *current_node);
-	void print(TreeNode<T> *current_node);
-
     public:
 	Bst();
 	~Bst();
