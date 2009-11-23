@@ -32,14 +32,9 @@ DLinkedlist<T>::DLinkedlist(const DLinkedlist & copy_linkedlist) {
     connect(m_head, m_tail);
 
     m_size = 0;
-    DNode<T> *copy_node = copy_linkedlist.m_head->next();
 
-    for(int i = 0; i < copy_linkedlist.size(); i++) {
-	DNode<T> *curr_node = new DNode<T>();
-
-	*curr_node = *copy_node;
-	
-	copy_node = copy_node->next();
+    for(int i = 0; i < copy_linkedlist.size(); i++ ) {
+	add(copy_linkedlist.get(i));
     }
 }
 
@@ -144,7 +139,7 @@ T & DLinkedlist<T>::get(int position) const {
  * @throw list_index_out_of_bounds if position is ound of bounds
  */
 template<class T>
-void DLinkedlist<T>::rm(int position) throw(list_index_out_of_bounds) {
+void DLinkedlist<T>::rm(const int position) throw(list_index_out_of_bounds) {
     if(position < 0 || (unsigned int)position >= m_size) {
 	throw list_index_out_of_bounds(position);
     }
@@ -173,8 +168,12 @@ DLinkedlist<T> & DLinkedlist<T>::operator=(const DLinkedlist & copy_linkedlist) 
     
     clear();
 
-    for(int i = 0; i < copy_linkedlist.size(); i++ ) {
-	add(copy_linkedlist.get(i));
+    DNode<T> *curr = copy_linkedlist.m_head->next();
+
+    while(curr != copy_linkedlist.m_tail) {
+	add(*(curr->data()));
+
+	curr = curr->next();
     }
 
     return *this;

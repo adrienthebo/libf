@@ -27,12 +27,12 @@ class DLinkedlist {
 	
 	int size() const;
 
-	void add(T data, int position) throw(list_index_out_of_bounds);
-	void add(T data) throw(list_index_out_of_bounds); 
+	void add(const T data, const int position) throw(list_index_out_of_bounds);
+	void add(const T data) throw(list_index_out_of_bounds); 
 
-	T & get(int position) const; 
+	T & get(const int position) const; 
 
-	void rm(int position) throw(list_index_out_of_bounds);
+	void rm(const int position) throw(list_index_out_of_bounds);
 	void clear();
 };
 
